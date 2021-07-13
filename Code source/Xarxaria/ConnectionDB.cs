@@ -165,7 +165,10 @@ namespace Xarxaria
                 else if (playerInventory.Items[i] != 0)
                 {
                     //Insert player item relation
-                    cmd.CommandText = "INSERT INTO Player_Item VALUES (" + player.Id + ", " + itemId + ", " + quantity + ")";
+                    cmd = new SQLiteCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = sqlConnection;
+                    cmd.CommandText = "INSERT INTO Player_Item (quantity, idPlayer, idItem) VALUES (" + quantity + ", " + player.Id + ", " + itemId + ")";
                     sqlConnection.Open();
                     cmd.ExecuteNonQuery();
                     sqlConnection.Close();
